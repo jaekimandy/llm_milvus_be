@@ -1,6 +1,6 @@
 # GaiA-ABiz Backend
 
-SK Hynix GaiA (AI Agent)와 A.Biz 통합 Backend 개발 프로젝트
+GaiA (AI Agent)와 A.Biz 통합 Backend 개발 프로젝트
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://www.python.org/)
@@ -20,13 +20,9 @@ SK Hynix GaiA (AI Agent)와 A.Biz 통합 Backend 개발 프로젝트
 
 ## 프로젝트 개요
 
-이 프로젝트는 SK Hynix의 GaiA AI Agent와 A.Biz 시스템을 통합하는 백엔드 서비스입니다.
+이 프로젝트는 GaiA AI Agent와 A.Biz 시스템을 통합하는 백엔드 서비스입니다.
 
-**기간**: 2025.10.16 ~ 2026.4.15
-**장소**: 분당(정자)
-**팀 구성**: PMO 3명 + BE개발(공통) 3명 + BE개발 9명
-
-### 주요 기능
+주요 기능
 
 - **인증/인가 (Authentication/Authorization)**: OAuth2.0 및 JWT 기반 보안
 - **모니터링 및 로깅**: Prometheus 메트릭, 구조화된 로깅, API 통계
@@ -171,54 +167,6 @@ python main.py
 - `POST /encryption/encrypt-file` - 파일 암호화
 - `POST /encryption/decrypt-file` - 파일 복호화
 
-## Kubernetes 배포
-
-### 1. Namespace 생성
-
-```bash
-kubectl apply -f k8s/namespace.yaml
-```
-
-### 2. Secrets 생성
-
-```bash
-# secrets.yaml.example을 복사하여 실제 값으로 수정
-cp k8s/secrets.yaml.example k8s/secrets.yaml
-# secrets.yaml 편집 후
-kubectl apply -f k8s/secrets.yaml
-```
-
-### 3. ConfigMap 적용
-
-```bash
-kubectl apply -f k8s/configmap.yaml
-```
-
-### 4. Deployment 배포
-
-```bash
-kubectl apply -f k8s/deployment.yaml
-```
-
-### 5. HPA (Horizontal Pod Autoscaler) 설정
-
-```bash
-kubectl apply -f k8s/hpa.yaml
-```
-
-### 6. Ingress 설정 (선택사항)
-
-```bash
-kubectl apply -f k8s/ingress.yaml
-```
-
-### 배포 확인
-
-```bash
-kubectl get pods -n gaia-abiz
-kubectl get svc -n gaia-abiz
-kubectl logs -f deployment/gaia-abiz-backend -n gaia-abiz
-```
 
 ## 개발 가이드
 

@@ -206,24 +206,9 @@ python main.py
 - 필드 레벨 암호화
 - HTTPS 권장 (Ingress에서 설정)
 - 환경 변수로 민감 정보 관리
-- Kubernetes Secrets 사용
 
 ## 테스트
 
 ```bash
 pytest
 ```
-
-## 라이센스
-
-Private - SK Hynix
-
-## 팀
-
-- PMO: QA, DBA, AA
-- BE 개발(공통): 인증/인가, 모니터링, 암호화
-- BE 개발: AI Agent 및 Backend
-
-## 연락처
-
-프로젝트 관련 문의: [이메일 주소]

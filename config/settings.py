@@ -42,8 +42,8 @@ class Settings(BaseSettings):
 
     # Embeddings Configuration (Local Only)
     EMBEDDINGS_PROVIDER: str = "local"
-    EMBEDDINGS_MODEL: str = "paraphrase-multilingual-MiniLM-L12-v2"
-    EMBEDDINGS_DIMENSION: int = 384
+    EMBEDDINGS_MODEL: str = "sentence-transformers/all-mpnet-base-v2"
+    EMBEDDINGS_DIMENSION: int = 768
 
     # Milvus Vector Database
     MILVUS_HOST: str = "localhost"

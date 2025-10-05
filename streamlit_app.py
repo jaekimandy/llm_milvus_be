@@ -10,7 +10,6 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from agent.rag_service import RAGService
-from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # Page configuration
 st.set_page_config(
@@ -50,13 +49,8 @@ st.markdown("""
 @st.cache_resource
 def load_rag_service():
     """Load RAG service (cached)"""
-    with st.spinner("임베딩 모델 로딩 중... (최초 1회만 소요됩니다)"):
-        embeddings = HuggingFaceEmbeddings(
-            model_name="paraphrase-multilingual-MiniLM-L12-v2",
-            model_kwargs={'device': 'cpu'},
-            encode_kwargs={'normalize_embeddings': True}
-        )
-        service = RAGService(embeddings=embeddings)
+    with st.spinner("MPNet 임베딩 모델 로딩 중... (최초 1회, 약 10초 소요)"):
+        service = RAGService(model_name="sentence-transformers/all-mpnet-base-v2")
         return service
 
 # Header

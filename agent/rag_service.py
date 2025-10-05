@@ -46,9 +46,20 @@ class RAGService:
             model_name: HuggingFace model name for embeddings
             vector_store_path: Path to saved vector store (optional)
         """
+        # Store model name
+        self.model_name = model_name
+
+        # For Jina Embeddings v3, need trust_remote_code=True
+        encode_kwargs = {'normalize_embeddings': True}
+        if 'jina' in model_name.lower():
+            model_kwargs = {'device': 'cpu', 'trust_remote_code': True}
+        else:
+            model_kwargs = {'device': 'cpu'}
+
         self.embeddings = HuggingFaceEmbeddings(
             model_name=model_name,
-            model_kwargs={'device': 'cpu'}
+            model_kwargs=model_kwargs,
+            encode_kwargs=encode_kwargs
         )
 
         self.text_splitter = RecursiveCharacterTextSplitter(
@@ -172,14 +183,24 @@ class RAGService:
 
     def get_stats(self) -> Dict[str, Any]:
         """Get statistics about the vector store"""
+        # Get embedding dimension from embeddings client
+        try:
+            test_embedding = self.embeddings.embed_query("test")
+            embedding_dimension = len(test_embedding)
+        except:
+            embedding_dimension = 0
+
         if self.vectorstore is None:
             return {
                 "initialized": False,
-                "document_count": 0
+                "document_count": 0,
+                "embedding_model": self.model_name,
+                "embedding_dimension": embedding_dimension
             }
 
         return {
             "initialized": True,
             "document_count": self.vectorstore.index.ntotal,
-            "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2"
+            "embedding_model": self.model_name,
+            "embedding_dimension": embedding_dimension
         }

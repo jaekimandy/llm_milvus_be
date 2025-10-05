@@ -38,7 +38,7 @@ GaiA-ABiz는 **FastAPI**, **LangChain**, **LangGraph**로 구축된 현대적인
 │   PostgreSQL     │  │  Milvus Vector  │  │   로컬 LLM         │
 │   (관계형 DB)     │  │    Database     │  │                     │
 │                  │  │                 │  │  • Qwen 2.5 7B     │
-│  • 사용자        │  │  • 임베딩       │  │  • Jina Embed v3   │
+│  • 사용자        │  │  • 임베딩       │  │  • MPNet Embeddings   │
 │  • 세션          │  │  • 문서         │  │                     │
 │  • 토큰          │  │  • 시맨틱       │  │  (로컬 실행)        │
 │  • 메시지        │  │    검색         │  │                     │
@@ -64,7 +64,7 @@ GaiA-ABiz는 **FastAPI**, **LangChain**, **LangGraph**로 구축된 현대적인
 - **LangGraph 0.6.8**: 상태 기반 멀티 에이전트 워크플로우 ✅
 - **Sentence Transformers 3.1.1**: 다국어 임베딩 ✅
 - **Qwen 2.5 7B GGUF**: CPU 최적화 로컬 LLM ✅
-- **Jina Embeddings v3**: 프로덕션 임베딩 (다운로드 완료) ✅
+- **MPNet (all-mpnet-base-v2)**: 프로덕션 임베딩 (다운로드 완료) ✅
 
 ### 데이터베이스 & 벡터 스토어
 - **PostgreSQL 16**: 주요 관계형 데이터베이스
@@ -278,8 +278,8 @@ python -m pytest tests/test_jina_embeddings.py \
 
 ### 프로덕션 모델 (사용 준비 완료)
 
-#### 1. Jina Embeddings v3 (~1.1GB) ✅
-- **위치**: `scripts/models/jina-embeddings-v3/`
+#### 1. MPNet (all-mpnet-base-v2) (~1.1GB) ✅
+- **위치**: `scripts/models/all-mpnet-base-v2/`
 - **용도**: 고품질 다국어 텍스트 임베딩
 - **기능**:
   - 8192 토큰 컨텍스트 윈도우

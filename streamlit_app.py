@@ -55,7 +55,7 @@ def load_rag_service():
 
 # Header
 st.markdown('<div class="main-header">🤖 GaiA-ABiz RAG 시스템</div>', unsafe_allow_html=True)
-st.markdown("**로컬 LLM 기반 의미적 검색 시스템** | Qwen 2.5 + Jina Embeddings")
+st.markdown("**로컬 LLM 기반 의미적 검색 시스템** | Qwen 2.5 + MPNet Embeddings")
 
 # Sidebar
 with st.sidebar:

@@ -439,7 +439,7 @@ class EmbeddingProvider:
     def _load_model(self):
         if settings.EMBEDDINGS_PROVIDER == "jina":
             return SentenceTransformer(
-                "jinaai/jina-embeddings-v3",
+                "jinaai/all-mpnet-base-v2",
                 trust_remote_code=True
             )
         elif settings.EMBEDDINGS_PROVIDER == "multilingual":

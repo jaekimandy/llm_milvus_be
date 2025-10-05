@@ -12,7 +12,7 @@
 ### 사용 중인 모델
 
 1. **LLM (언어 모델)**: Qwen 2.5 7B Instruct GGUF
-2. **임베딩**: Jina Embeddings v3 / Sentence Transformers
+2. **임베딩**: MPNet (all-mpnet-base-v2) / Sentence Transformers
 
 ### 장점
 - ✅ **비용 없음** - 외부 API 비용 불필요
@@ -102,7 +102,7 @@ print(response)
 
 ## 2. 임베딩 설정
 
-### 옵션 1: Jina Embeddings v3 (프로덕션용)
+### 옵션 1: MPNet (all-mpnet-base-v2) (프로덕션용)
 
 **상태**: ✅ 다운로드 완료 (Windows 심볼릭 링크 문제로 현재 미사용)
 
@@ -110,7 +110,7 @@ print(response)
 from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer(
-    "jinaai/jina-embeddings-v3",
+    "jinaai/all-mpnet-base-v2",
     trust_remote_code=True
 )
 

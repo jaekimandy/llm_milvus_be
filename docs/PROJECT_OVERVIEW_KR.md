@@ -266,7 +266,7 @@ gaia-abiz-backend/
 │   ├── download_qwen2.5.py          # Qwen 2.5 다운로드
 │   ├── init_milvus.py               # Milvus 초기화
 │   └── models/                      # 다운로드된 모델
-│       ├── jina-embeddings-v3/      # 1.1GB
+│       ├── all-mpnet-base-v2/      # 1.1GB
 │       └── qwen2.5-gguf/            # 4.4GB
 │
 ├── docs/                         # 한국어 문서

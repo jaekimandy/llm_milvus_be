@@ -134,7 +134,7 @@ gaia-abiz-backend/
 - **LangChain 0.3.27** - RAG 프레임워크
 - **LangGraph 0.6.8** - 멀티 에이전트 워크플로우
 - **Qwen 2.5 7B** - 로컬 LLM (CPU 최적화)
-- **Jina Embeddings v3** - 프로덕션 임베딩
+- **MPNet (all-mpnet-base-v2)** - 프로덕션 임베딩
 - **Sentence Transformers** - 다국어 임베딩
 
 ### 데이터베이스
@@ -240,8 +240,8 @@ docker-compose down
 
 ## 📦 다운로드한 모델
 
-### 1. Jina Embeddings v3 (~1.1GB)
-- **위치**: `scripts/models/jina-embeddings-v3/`
+### 1. MPNet (all-mpnet-base-v2) (~1.1GB)
+- **위치**: `scripts/models/all-mpnet-base-v2/`
 - **용도**: 다국어 텍스트 임베딩
 - **상태**: ✅ 다운로드 완료
 

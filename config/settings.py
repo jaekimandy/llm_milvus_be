@@ -32,25 +32,18 @@ class Settings(BaseSettings):
     ENCRYPTION_KEY: str
     KEY_ROTATION_DAYS: int = 90
 
-    # LLM Configuration
-    LLM_PROVIDER: str = "anthropic"  # "anthropic" or "openai"
-
-    # Anthropic (Claude)
-    ANTHROPIC_API_KEY: Optional[str] = None
-    ANTHROPIC_MODEL: str = "claude-sonnet-4-20250514"
-
-    # OpenAI (GPT)
-    OPENAI_API_KEY: Optional[str] = None
-    OPENAI_MODEL: str = "gpt-4"
-
-    # Common LLM settings
+    # LLM Configuration (Local Only)
+    LLM_PROVIDER: str = "local"
+    LLM_MODEL_PATH: str = "scripts/models/qwen2.5-gguf/Qwen2.5-7B-Instruct-Q4_K_M.gguf"
     LLM_TEMPERATURE: float = 0.7
     LLM_MAX_TOKENS: int = 4096
+    LLM_CONTEXT_LENGTH: int = 32768
+    LLM_N_THREADS: int = 8
 
-    # Embeddings Configuration
-    EMBEDDINGS_PROVIDER: str = "voyage"  # "openai", "voyage"
-    VOYAGE_API_KEY: Optional[str] = None
-    VOYAGE_MODEL: str = "voyage-3"  # Anthropic's recommended embeddings
+    # Embeddings Configuration (Local Only)
+    EMBEDDINGS_PROVIDER: str = "local"
+    EMBEDDINGS_MODEL: str = "paraphrase-multilingual-MiniLM-L12-v2"
+    EMBEDDINGS_DIMENSION: int = 384
 
     # Milvus Vector Database
     MILVUS_HOST: str = "localhost"

@@ -25,7 +25,7 @@ class LLMClient:
             model_kwargs={'device': 'cpu'},
             encode_kwargs={'normalize_embeddings': True}
         )
-        print(f"✓ Loaded embeddings model (dimension: {settings.EMBEDDINGS_DIMENSION})")
+        print(f"[OK] Loaded embeddings model (dimension: {settings.EMBEDDINGS_DIMENSION})")
 
         # Initialize local LLM (lazy loading)
         self.chat_model = None
@@ -33,11 +33,11 @@ class LLMClient:
 
         # Check if model file exists
         if not os.path.exists(self.model_path):
-            print(f"⚠ Warning: LLM model not found at {self.model_path}")
+            print(f"[WARNING] LLM model not found at {self.model_path}")
             print("  LLM generation will not be available.")
             print("  Run: python scripts/download_qwen2.5.py")
         else:
-            print(f"✓ LLM model ready at {self.model_path}")
+            print(f"[OK] LLM model ready at {self.model_path}")
 
     def _load_llm(self):
         """Lazy load LLM model (only when needed)"""
@@ -57,7 +57,7 @@ class LLMClient:
                 n_threads=settings.LLM_N_THREADS,
                 verbose=False,
             )
-            print("✓ Qwen 2.5 model loaded successfully")
+            print("[OK] Qwen 2.5 model loaded successfully")
         except ImportError:
             raise ImportError(
                 "llama-cpp-python is required for local LLM inference. "

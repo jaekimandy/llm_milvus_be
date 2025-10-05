@@ -60,3 +60,4 @@ k8s/secrets.yaml
 # Temporary files
 *.tmp
 *.bak
+backup_eng/

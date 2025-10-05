@@ -61,3 +61,11 @@ k8s/secrets.yaml
 *.tmp
 *.bak
 backup_eng/
+
+# Downloaded ML Models
+scripts/models/
+*.gguf
+*.safetensors
+*.bin
+*.onnx
+*.onnx_data

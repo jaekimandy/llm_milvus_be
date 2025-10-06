@@ -101,12 +101,12 @@ gaia-abiz-backend/
 │   ├── models.py            # 데이터 모델
 │   └── database.py          # DB 연결
 ├── tests/                    # 테스트 스위트
-│   ├── test_jina_embeddings.py     # 임베딩 테스트 (10개)
+│   ├── test_semiconductor_embeddings.py  # 임베딩 테스트 (10개)
 │   ├── test_langchain_rag.py       # RAG 테스트 (12개)
 │   ├── test_langgraph_agent.py     # 에이전트 테스트 (7개)
 │   └── test_langchain_milvus.py    # Milvus 테스트
 ├── scripts/                  # 유틸리티 스크립트
-│   ├── download_jina_embeddings.py
+│   ├── download_mpnet_embeddings.py
 │   ├── download_qwen2.5.py
 │   ├── init_milvus.py
 │   └── models/              # 다운로드된 모델
@@ -239,7 +239,7 @@ def similarity_search(
 ```
 tests/
 ├── conftest.py              # 공유 fixtures
-├── test_jina_embeddings.py  # 임베딩 유닛 테스트
+├── test_semiconductor_embeddings.py  # 임베딩 유닛 테스트
 ├── test_langchain_rag.py    # RAG 통합 테스트
 ├── test_langgraph_agent.py  # 에이전트 테스트
 └── test_api_routes.py       # API 엔드투엔드 테스트
@@ -257,7 +257,7 @@ from agent.rag_service import RAGService
 @pytest.fixture(scope="session")
 def embedding_model():
     """세션 전체에서 공유되는 임베딩 모델"""
-    return SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+    return SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
 @pytest.fixture(scope="function")
 def rag_service(embedding_model):
@@ -437,14 +437,13 @@ class EmbeddingProvider:
         self.model = self._load_model()
 
     def _load_model(self):
-        if settings.EMBEDDINGS_PROVIDER == "jina":
+        if settings.EMBEDDINGS_PROVIDER == "mpnet":
             return SentenceTransformer(
-                "jinaai/all-mpnet-base-v2",
-                trust_remote_code=True
+                "sentence-transformers/all-mpnet-base-v2"
             )
-        elif settings.EMBEDDINGS_PROVIDER == "multilingual":
+        elif settings.EMBEDDINGS_PROVIDER == "local":
             return SentenceTransformer(
-                "paraphrase-multilingual-MiniLM-L12-v2"
+                "sentence-transformers/all-mpnet-base-v2"
             )
         else:
             raise ValueError(f"Unknown provider: {settings.EMBEDDINGS_PROVIDER}")

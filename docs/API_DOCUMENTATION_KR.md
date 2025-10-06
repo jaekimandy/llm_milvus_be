@@ -255,9 +255,9 @@ GET /api/v1/rag/stats
 ```json
 {
   "total_documents": 1542,
-  "vector_dimension": 384,
+  "vector_dimension": 768,
   "index_type": "IVF_FLAT",
-  "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "embedding_model": "sentence-transformers/all-mpnet-base-v2",
   "storage_backend": "milvus",
   "last_updated": "2025-10-05T14:32:10Z"
 }

@@ -49,12 +49,9 @@ class RAGService:
         # Store model name
         self.model_name = model_name
 
-        # For Jina Embeddings v3, need trust_remote_code=True
+        # Standard embeddings configuration
         encode_kwargs = {'normalize_embeddings': True}
-        if 'jina' in model_name.lower():
-            model_kwargs = {'device': 'cpu', 'trust_remote_code': True}
-        else:
-            model_kwargs = {'device': 'cpu'}
+        model_kwargs = {'device': 'cpu'}
 
         self.embeddings = HuggingFaceEmbeddings(
             model_name=model_name,

@@ -21,11 +21,8 @@ class LLMClient:
         # Initialize local embeddings
         print(f"Loading local embeddings: {settings.EMBEDDINGS_MODEL}")
 
-        # For Jina Embeddings v3, need trust_remote_code=True
-        if 'jina' in settings.EMBEDDINGS_MODEL.lower():
-            model_kwargs = {'device': 'cpu', 'trust_remote_code': True}
-        else:
-            model_kwargs = {'device': 'cpu'}
+        # Standard embeddings configuration
+        model_kwargs = {'device': 'cpu'}
 
         self.embeddings = HuggingFaceEmbeddings(
             model_name=settings.EMBEDDINGS_MODEL,

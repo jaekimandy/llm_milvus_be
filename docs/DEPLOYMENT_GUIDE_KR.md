@@ -50,7 +50,7 @@ LLM_CONTEXT_SIZE=32768
 
 # 임베딩 (로컬)
 EMBEDDINGS_PROVIDER=local
-EMBEDDINGS_MODEL=paraphrase-multilingual-MiniLM-L12-v2
+EMBEDDINGS_MODEL=sentence-transformers/all-mpnet-base-v2
 EMBEDDINGS_DEVICE=cpu
 
 # Milvus

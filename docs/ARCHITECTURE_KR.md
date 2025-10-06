@@ -64,7 +64,7 @@ GaiA-ABiz는 **FastAPI**, **LangChain**, **LangGraph**로 구축된 현대적인
 - **LangGraph 0.6.8**: 상태 기반 멀티 에이전트 워크플로우 ✅
 - **Sentence Transformers 3.1.1**: 다국어 임베딩 ✅
 - **Qwen 2.5 7B GGUF**: CPU 최적화 로컬 LLM ✅
-- **MPNet (all-mpnet-base-v2)**: 프로덕션 임베딩 (다운로드 완료) ✅
+- **MPNet (all-mpnet-base-v2)**: 프로덕션 임베딩 (768차원) ✅
 
 ### 데이터베이스 & 벡터 스토어
 - **PostgreSQL 16**: 주요 관계형 데이터베이스
@@ -204,7 +204,7 @@ encryption/
 
 ### 테스트 스위트 상태: 29/29 통과 (100%)
 
-#### 1. 임베딩 테스트 (`test_jina_embeddings.py`) - 10/10 ✅
+#### 1. 임베딩 테스트 (`test_semiconductor_embeddings.py`) - 10/10 ✅
 - 모델 로딩 및 초기화
 - 단일 및 배치 임베딩 생성
 - 시맨틱 유사도 테스트 (높음: 0.9878, 낮음: -0.1387)
@@ -212,7 +212,7 @@ encryption/
 - 한국어 시맨틱 검색
 - Top-K 문서 검색
 
-**모델**: `paraphrase-multilingual-MiniLM-L12-v2`
+**모델**: `sentence-transformers/all-mpnet-base-v2` (768차원)
 
 #### 2. LangChain RAG 테스트 (`test_langchain_rag.py`) - 12/12 ✅
 - HuggingFace 임베딩 통합
@@ -253,7 +253,7 @@ encryption/
 
 ```bash
 # 모든 RAG 테스트 실행
-python -m pytest tests/test_jina_embeddings.py \
+python -m pytest tests/test_semiconductor_embeddings.py \
                  tests/test_langchain_rag.py \
                  tests/test_langgraph_agent.py -v
 
@@ -278,15 +278,15 @@ python -m pytest tests/test_jina_embeddings.py \
 
 ### 프로덕션 모델 (사용 준비 완료)
 
-#### 1. MPNet (all-mpnet-base-v2) (~1.1GB) ✅
+#### 1. MPNet (all-mpnet-base-v2) (~420MB) ✅
 - **위치**: `scripts/models/all-mpnet-base-v2/`
-- **용도**: 고품질 다국어 텍스트 임베딩
+- **용도**: 고품질 텍스트 임베딩
 - **기능**:
-  - 8192 토큰 컨텍스트 윈도우
-  - 다국어 지원 (100개 이상 언어)
+  - 514 토큰 컨텍스트 윈도우
+  - 영어 및 다국어 지원
   - RAG 애플리케이션에 최적화
-- **상태**: 다운로드 완료, 프로덕션 준비
-- **참고**: Windows 심볼릭 링크 문제로 경량 대안 사용 중
+  - 768차원 임베딩
+- **상태**: 다운로드 완료, 프로덕션 사용 중
 
 #### 2. Qwen 2.5 7B Instruct GGUF (~4.4GB) ✅
 - **위치**: `scripts/models/qwen2.5-gguf/`
@@ -300,11 +300,11 @@ python -m pytest tests/test_jina_embeddings.py \
 - **사용법**: llama-cpp-python으로 추론
 
 #### 3. 활성 모델 (테스트 및 프로덕션)
-- **모델**: `paraphrase-multilingual-MiniLM-L12-v2`
-- **용도**: 경량 다국어 임베딩
-- **차원**: 384
+- **모델**: `sentence-transformers/all-mpnet-base-v2`
+- **용도**: 고품질 임베딩
+- **차원**: 768
 - **상태**: 모든 테스트에서 현재 활성화 ✅
-- **성능**: 0.9677 영-한 교차 언어 유사도
+- **성능**: 우수한 의미적 유사도
 
 ### 모델 관리
 - 모든 모델은 `.gitignore`를 통해 git에서 제외
@@ -352,5 +352,5 @@ cd tests && cat TEST_SUMMARY_KR.md
 cd scripts && cat MODEL_DOWNLOADS_KR.md
 
 # 모든 테스트 실행
-python -m pytest tests/test_*embeddings*.py tests/test_*rag*.py tests/test_*agent*.py -v
+python -m pytest tests/test_semiconductor_embeddings.py tests/test_*rag*.py tests/test_*agent*.py -v
 ```

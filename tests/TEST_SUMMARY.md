@@ -5,10 +5,10 @@ Successfully implemented and tested semantic search and RAG (Retrieval Augmented
 
 ## Test Results
 
-### 1. Jina Embeddings Tests ✅
-**File**: [test_jina_embeddings.py](test_jina_embeddings.py)
-**Status**: 10/10 tests passed
-**Model Used**: `paraphrase-multilingual-MiniLM-L12-v2`
+### 1. MPNet Embeddings Tests ✅
+**File**: [test_semiconductor_embeddings.py](test_semiconductor_embeddings.py)
+**Status**: All tests passed
+**Model Used**: `sentence-transformers/all-mpnet-base-v2`
 
 #### Test Coverage:
 - ✅ Model loading and initialization
@@ -65,30 +65,27 @@ English-Korean cross-lingual: 0.9677
 - **scikit-learn** (1.7.2): Cosine similarity calculations
 
 ### Models
-1. **Jina Embeddings v3** (Downloaded, ~1.1GB)
+1. **MPNet Embeddings (all-mpnet-base-v2)** (Active in tests)
    - Purpose: High-quality text embeddings
-   - Features: Multilingual, 8192 token context
+   - Features: 768-dimensional embeddings, excellent semantic understanding
+   - Embedding dimension: 768
 
 2. **Qwen 2.5 7B Instruct GGUF** (Downloaded, ~4.4GB)
    - Purpose: CPU-optimized LLM
    - Features: Korean support, 32K context window
 
-3. **paraphrase-multilingual-MiniLM-L12-v2** (Active in tests)
-   - Purpose: Lightweight multilingual embeddings
-   - Features: Fast, multilingual, good Korean support
-
 ## Project Structure
 ```
 gaia-abiz-backend/
 ├── tests/
-│   ├── test_jina_embeddings.py       # Embedding model tests
-│   ├── test_langchain_rag.py         # LangChain RAG tests
-│   └── TEST_SUMMARY.md               # This file
+│   ├── test_semiconductor_embeddings.py  # Semiconductor RAG tests
+│   ├── test_langchain_rag.py             # LangChain RAG tests
+│   └── TEST_SUMMARY.md                   # This file
 ├── scripts/
 │   ├── models/
-│   │   ├── jina-embeddings-v3/       # Downloaded model
-│   │   └── qwen2.5-gguf/             # Downloaded model
-│   ├── download_jina_embeddings.py
+│   │   ├── all-mpnet-base-v2/            # MPNet embeddings model
+│   │   └── qwen2.5-gguf/                 # Downloaded model
+│   ├── download_mpnet_embeddings.py
 │   ├── download_qwen2.5.py
 │   └── MODEL_DOWNLOADS.md
 └── requirements.txt
@@ -122,7 +119,7 @@ Based on [doc/jd.md](../../doc/jd.md), the project requires:
 - Add monitoring and logging
 
 ### 4. Production Optimizations
-- Switch to Jina Embeddings v3 (currently blocked by Windows symlinks)
+- Optimize MPNet embeddings performance
 - Enable GPU support if available
 - Implement caching strategies
 - Add rate limiting
@@ -132,8 +129,8 @@ Based on [doc/jd.md](../../doc/jd.md), the project requires:
 ```bash
 cd gaia-abiz-backend
 
-# Run embedding tests
-python -m pytest tests/test_jina_embeddings.py -v
+# Run semiconductor embedding tests
+python -m pytest tests/test_semiconductor_embeddings.py -v
 
 # Run LangChain RAG tests
 python -m pytest tests/test_langchain_rag.py -v

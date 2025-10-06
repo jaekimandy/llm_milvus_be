@@ -41,7 +41,7 @@ POST /api/v1/rag/search
 ```
 
 **특징**:
-- 384차원 다국어 임베딩
+- 768차원 다국어 임베딩 (MPNet)
 - 메타데이터 필터링
 - MMR (Maximal Marginal Relevance) 다양성 검색
 - 실시간 인덱싱
@@ -105,7 +105,7 @@ graph.add_conditional_edges("retrieve", should_generate)
 |----------|------|------|------|
 | **프레임워크** | FastAPI | 0.118.0 | REST API |
 | **LLM** | Qwen 2.5 | 7B-Q4 | 텍스트 생성 |
-| **임베딩** | Jina v3 / MiniLM | v3 / L12 | 벡터 변환 |
+| **임베딩** | MPNet (all-mpnet-base-v2) | 768d | 벡터 변환 |
 | **RAG** | LangChain | 0.3.27 | RAG 오케스트레이션 |
 | **에이전트** | LangGraph | 0.6.8 | 워크플로우 관리 |
 | **벡터 DB** | Milvus | 2.3.3 | 벡터 저장 |
@@ -153,7 +153,7 @@ graph.add_conditional_edges("retrieve", should_generate)
 │  ┌────────────────────▼────────────────────────────┐   │
 │  │         RAG 서비스 (rag_service.py)             │   │
 │  │  - 문서 청킹 (RecursiveCharacterTextSplitter)  │   │
-│  │  - 임베딩 생성 (Jina v3 / MiniLM)              │   │
+│  │  - 임베딩 생성 (MPNet all-mpnet-base-v2)       │   │
 │  │  - 검색 (유사도, MMR, 필터링)                   │   │
 │  └────┬──────────────────────────────┬─────────────┘   │
 │       │                              │                 │
@@ -195,7 +195,7 @@ RAG 서비스
     │
     ├─→ 청킹 (1000자, 200자 오버랩)
     │
-    ├─→ 임베딩 생성 (384차원 벡터)
+    ├─→ 임베딩 생성 (768차원 벡터 - MPNet)
     │
     └─→ Milvus 저장 (벡터 + 메타데이터)
 ```
@@ -256,13 +256,13 @@ gaia-abiz-backend/
 │   └── database.py              # DB 연결 및 세션
 │
 ├── tests/                        # 테스트 스위트 (29/29 통과)
-│   ├── test_jina_embeddings.py  # 임베딩 테스트 (10개)
+│   ├── test_semiconductor_embeddings.py  # 임베딩 테스트 (10개)
 │   ├── test_langchain_rag.py    # RAG 테스트 (12개)
 │   ├── test_langgraph_agent.py  # 에이전트 테스트 (7개)
 │   └── test_langchain_milvus.py # Milvus 통합 테스트
 │
 ├── scripts/                      # 유틸리티 스크립트
-│   ├── download_jina_embeddings.py  # Jina v3 다운로드
+│   ├── download_mpnet_embeddings.py  # MPNet 다운로드
 │   ├── download_qwen2.5.py          # Qwen 2.5 다운로드
 │   ├── init_milvus.py               # Milvus 초기화
 │   └── models/                      # 다운로드된 모델
@@ -310,7 +310,7 @@ DATABASE_URL=postgresql://user:password@localhost:5432/gaia_abiz
 LLM_PROVIDER=local
 LLM_MODEL_PATH=scripts/models/qwen2.5-gguf/Qwen2.5-7B-Instruct-Q4_K_M.gguf
 EMBEDDINGS_PROVIDER=local
-EMBEDDINGS_MODEL=paraphrase-multilingual-MiniLM-L12-v2
+EMBEDDINGS_MODEL=sentence-transformers/all-mpnet-base-v2
 MILVUS_HOST=localhost
 MILVUS_PORT=19530
 ```
@@ -355,7 +355,7 @@ curl -X POST http://localhost:8000/api/v1/rag/search \
 
 | 테스트 파일 | 테스트 수 | 상태 | 커버리지 |
 |-------------|----------|------|----------|
-| `test_jina_embeddings.py` | 10 | ✅ 통과 | 임베딩 기능 |
+| `test_semiconductor_embeddings.py` | 10 | ✅ 통과 | 임베딩 기능 |
 | `test_langchain_rag.py` | 12 | ✅ 통과 | RAG 파이프라인 |
 | `test_langgraph_agent.py` | 7 | ✅ 통과 | 에이전트 워크플로우 |
 | **합계** | **29** | **100%** | **전체 RAG 시스템** |
@@ -540,7 +540,7 @@ Copyright (c) 2025 SK Hynix
 - [Milvus](https://github.com/milvus-io/milvus) - 벡터 데이터베이스
 - [FastAPI](https://github.com/tiangolo/fastapi) - 웹 프레임워크
 - [Qwen 2.5](https://github.com/QwenLM/Qwen2.5) - LLM 모델
-- [Jina AI](https://github.com/jina-ai/jina) - 임베딩 모델
+- [Sentence Transformers](https://github.com/UKPLab/sentence-transformers) - 임베딩 모델
 
 ---
 

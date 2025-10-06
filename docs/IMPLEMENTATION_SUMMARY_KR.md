@@ -40,7 +40,7 @@
 ```
 gaia-abiz-backend/
 ├── tests/
-│   ├── test_jina_embeddings.py       # ✅ 10 테스트 - 임베딩 및 시맨틱 검색
+│   ├── test_semiconductor_embeddings.py  # ✅ 10 테스트 - 임베딩 및 시맨틱 검색
 │   ├── test_langchain_rag.py         # ✅ 12 테스트 - FAISS로 RAG
 │   ├── test_langgraph_agent.py       # ✅ 7 테스트 - 상태 기반 에이전트
 │   ├── test_langchain_milvus.py      # 🔧 Milvus 배포 준비 완료
@@ -53,7 +53,7 @@ gaia-abiz-backend/
 │   ├── models/                       # 다운로드한 모델 (.gitignore에 포함)
 │   │   ├── all-mpnet-base-v2/
 │   │   └── qwen2.5-gguf/
-│   ├── download_jina_embeddings.py
+│   ├── download_mpnet_embeddings.py
 │   ├── download_qwen2.5.py
 │   └── MODEL_DOWNLOADS_KR.md
 ├── docker-compose.yml                # Milvus, Postgres, etcd, MinIO 포함
@@ -64,7 +64,7 @@ gaia-abiz-backend/
 
 ## 🧪 테스트 커버리지 세부사항
 
-### 1. 임베딩 테스트 (`test_jina_embeddings.py`) - 10/10 ✅
+### 1. 임베딩 테스트 (`test_semiconductor_embeddings.py`) - 10/10 ✅
 
 **테스트된 주요 기능:**
 - ✅ 모델 로딩 및 초기화
@@ -76,7 +76,7 @@ gaia-abiz-backend/
 - ✅ 임베딩 일관성
 - ✅ Top-K 문서 검색
 
-**사용 모델**: `paraphrase-multilingual-MiniLM-L12-v2`
+**사용 모델**: `sentence-transformers/all-mpnet-base-v2` (768차원)
 
 ### 2. LangChain RAG 테스트 (`test_langchain_rag.py`) - 12/12 ✅
 
@@ -136,7 +136,7 @@ gaia-abiz-backend/
 - 모니터링 및 로깅 추가
 
 ### 4. 프로덕션 최적화
-- MPNet (all-mpnet-base-v2)로 전환 (현재 Windows 심볼릭 링크 문제로 차단)
+- ✅ MPNet (all-mpnet-base-v2) 사용 중 (768차원 임베딩)
 - 가능한 경우 GPU 지원 활성화
 - 캐싱 전략 구현
 - 속도 제한 추가
@@ -147,7 +147,7 @@ gaia-abiz-backend/
 cd gaia-abiz-backend
 
 # 임베딩 테스트 실행
-python -m pytest tests/test_jina_embeddings.py -v
+python -m pytest tests/test_semiconductor_embeddings.py -v
 
 # LangChain RAG 테스트 실행
 python -m pytest tests/test_langchain_rag.py -v

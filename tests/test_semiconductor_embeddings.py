@@ -44,7 +44,7 @@ def semiconductor_docs():
 
 
 class TestSemiconductorEmbeddings:
-    """Test suite for semiconductor content with Jina Embeddings v3"""
+    """Test suite for semiconductor content with MPNet Embeddings"""
 
     def test_mpnet_embeddings_loaded(self, rag_service):
         """Test that MPNet embeddings are loaded"""
@@ -53,11 +53,11 @@ class TestSemiconductorEmbeddings:
         print(f"\nEmbedding model: {stats.get('embedding_model')}")
 
     def test_embedding_dimension(self, rag_service):
-        """Test that Jina v3 uses 1024 dimensions"""
+        """Test that MPNet uses 768 dimensions"""
         stats = rag_service.get_stats()
-        # Jina v3 can be 512 or 1024 depending on configuration
+        # MPNet uses 768 dimensions
         dimension = stats.get('embedding_dimension', 0)
-        assert dimension >= 512
+        assert dimension == 768
         print(f"\nEmbedding dimension: {dimension}")
 
     def test_add_semiconductor_documents(self, rag_service, semiconductor_docs):

@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ### 2. 테스트 실행
 ```bash
 # 모든 RAG 테스트 실행 (29개 테스트)
-python -m pytest tests/test_jina_embeddings.py tests/test_langchain_rag.py tests/test_langgraph_agent.py -v
+python -m pytest tests/test_semiconductor_embeddings.py tests/test_langchain_rag.py tests/test_langgraph_agent.py -v
 
 # 예상 결과: 29 passed ✅
 ```
@@ -25,7 +25,7 @@ from langchain.docstore.document import Document
 
 # 1. 임베딩 초기화
 embeddings = HuggingFaceEmbeddings(
-    model_name="paraphrase-multilingual-MiniLM-L12-v2"
+    model_name="sentence-transformers/all-mpnet-base-v2"
 )
 
 # 2. 문서 생성

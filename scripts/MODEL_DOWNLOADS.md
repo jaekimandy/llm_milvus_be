@@ -5,16 +5,17 @@ This document tracks the models downloaded for the SKCC GAIA ABIZ Backend projec
 
 ## Downloaded Models
 
-### 1. Jina Embeddings v3 ✅ COMPLETED
-- **Repository**: `jinaai/jina-embeddings-v3`
-- **Location**: `scripts/models/jina-embeddings-v3/`
-- **Size**: ~1.1GB (safetensors) + ~1.1GB (pytorch)
+### 1. MPNet Embeddings (all-mpnet-base-v2) ✅ COMPLETED
+- **Repository**: `sentence-transformers/all-mpnet-base-v2`
+- **Location**: `scripts/models/all-mpnet-base-v2/`
+- **Size**: ~420MB
 - **Purpose**: Text embeddings for RAG (Retrieval Augmented Generation)
 - **Features**:
-  - High-quality multilingual embeddings
-  - Support for long context (8192 tokens)
+  - High-quality semantic embeddings (768 dimensions)
+  - Support for context (514 tokens)
   - Excellent for semantic search and retrieval
-- **Download Script**: `download_jina_embeddings.py`
+  - Strong performance on diverse tasks
+- **Download Script**: `download_mpnet_embeddings.py`
 - **Status**: Successfully downloaded
 
 ### 2. Qwen 2.5 7B Instruct GGUF ⏳ IN PROGRESS
@@ -38,8 +39,8 @@ All download scripts are located in: `gaia-abiz-backend/scripts/`
 ```bash
 cd gaia-abiz-backend/scripts
 
-# Download Jina Embeddings v3
-python download_jina_embeddings.py
+# Download MPNet Embeddings
+python download_mpnet_embeddings.py
 
 # Download Qwen 2.5 7B GGUF
 python download_qwen2.5.py
@@ -47,13 +48,12 @@ python download_qwen2.5.py
 
 ## Using the Models
 
-### Jina Embeddings v3
+### MPNet Embeddings
 ```python
 from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer(
-    './models/jina-embeddings-v3',
-    trust_remote_code=True
+    './models/all-mpnet-base-v2'
 )
 
 # Generate embeddings
@@ -75,7 +75,7 @@ response = llm('Your prompt here')
 
 ## Notes
 - All models are optimized for CPU inference
-- Jina Embeddings v3 is ideal for embedding generation in RAG pipelines
+- MPNet (all-mpnet-base-v2) provides high-quality 768-dimensional embeddings for RAG pipelines
 - Qwen 2.5 provides excellent Korean language understanding and generation
 - Models are cached locally to avoid re-downloading
 

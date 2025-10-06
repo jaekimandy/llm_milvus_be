@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 ```bash
 # 모든 RAG 테스트 실행
-python -m pytest tests/test_jina_embeddings.py \
+python -m pytest tests/test_semiconductor_embeddings.py \
                  tests/test_langchain_rag.py \
                  tests/test_langgraph_agent.py -v
 
@@ -78,12 +78,12 @@ gaia-abiz-backend/
 │   ├── api_routes.py           # FastAPI 엔드포인트
 │   └── graph_agent.py          # LangGraph 워크플로우
 ├── tests/               # 테스트 스위트
-│   ├── test_jina_embeddings.py      # 10 테스트
-│   ├── test_langchain_rag.py        # 12 테스트
-│   └── test_langgraph_agent.py      # 7 테스트
+│   ├── test_semiconductor_embeddings.py  # 반도체 테스트
+│   ├── test_langchain_rag.py             # 12 테스트
+│   └── test_langgraph_agent.py           # 7 테스트
 ├── scripts/             # 유틸리티 스크립트
 │   ├── models/                 # 다운로드한 모델
-│   ├── download_jina_embeddings.py
+│   ├── download_mpnet_embeddings.py
 │   └── download_qwen2.5.py
 ├── docs/                # 문서
 │   └── ARCHITECTURE_KR.md     # 시스템 아키텍처
@@ -274,7 +274,7 @@ pip install -r requirements.txt
 
 ```bash
 # 단일 테스트 파일
-python -m pytest tests/test_jina_embeddings.py -v
+python -m pytest tests/test_semiconductor_embeddings.py -v
 
 # 모든 테스트
 python -m pytest tests/ -v

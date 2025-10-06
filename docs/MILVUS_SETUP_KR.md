@@ -72,9 +72,9 @@ python scripts/init_milvus.py
 
 2️⃣  Detecting embedding dimensions...
    📊 Detecting embedding dimensions for provider: local
-   ✓ Embedding dimension: 384
+   ✓ Embedding dimension: 768
 
-3️⃣  Creating collection with dimension 384...
+3️⃣  Creating collection with dimension 768...
    ✓ Collection created successfully
 
 4️⃣  Verifying setup...
@@ -265,7 +265,7 @@ from pymilvus import Collection, CollectionSchema, FieldSchema, DataType
 # 스키마 정의
 fields = [
     FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, auto_id=True),
-    FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=384),
+    FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=768),
     FieldSchema(name="content", dtype=DataType.VARCHAR, max_length=65535),
     FieldSchema(name="metadata", dtype=DataType.JSON),
     FieldSchema(name="timestamp", dtype=DataType.INT64)
@@ -411,7 +411,7 @@ collection = Collection("documents")
 collection.load()
 
 # 쿼리 임베딩
-query_embedding = [[0.1, 0.2, ..., 0.384]]  # 384차원
+query_embedding = [[0.1, 0.2, ..., 0.768]]  # 768차원
 
 # 검색 수행
 results = collection.search(
@@ -488,9 +488,9 @@ expr = '(category == "tech" or category == "science") and score > 0.8'
 ```python
 # 여러 쿼리 동시 검색
 query_embeddings = [
-    [0.1, 0.2, ..., 0.384],
-    [0.3, 0.4, ..., 0.384],
-    [0.5, 0.6, ..., 0.384]
+    [0.1, 0.2, ..., 0.768],
+    [0.3, 0.4, ..., 0.768],
+    [0.5, 0.6, ..., 0.768]
 ]
 
 results = collection.search(
@@ -713,7 +713,7 @@ print(f"실제 차원: {len(embedding)}")
 - CPU: 8 코어
 - RAM: 16GB
 - 벡터 수: 100만
-- 차원: 384
+- 차원: 768
 - 인덱스: IVF_FLAT (nlist=2048)
 
 ### 결과

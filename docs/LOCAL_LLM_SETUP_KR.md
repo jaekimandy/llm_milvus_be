@@ -104,14 +104,13 @@ print(response)
 
 ### 옵션 1: MPNet (all-mpnet-base-v2) (프로덕션용)
 
-**상태**: ✅ 다운로드 완료 (Windows 심볼릭 링크 문제로 현재 미사용)
+**상태**: ✅ 다운로드 완료 및 사용 중
 
 ```python
 from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer(
-    "jinaai/all-mpnet-base-v2",
-    trust_remote_code=True
+    "sentence-transformers/all-mpnet-base-v2"
 )
 
 # 임베딩 생성
@@ -122,19 +121,19 @@ embeddings = model.encode([
 ```
 
 **특징:**
-- 8192 토큰 컨텍스트
-- 100개 이상 언어 지원
-- 차원: 1024
+- 514 토큰 컨텍스트
+- 영어 및 다국어 지원
+- 차원: 768
 
-### 옵션 2: Sentence Transformers (현재 활성)
+### 옵션 2: LangChain 통합
 
-**상태**: ✅ 현재 사용 중
+**상태**: ✅ 권장 방법
 
 ```python
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 embeddings = HuggingFaceEmbeddings(
-    model_name="paraphrase-multilingual-MiniLM-L12-v2",
+    model_name="sentence-transformers/all-mpnet-base-v2",
     model_kwargs={'device': 'cpu'}
 )
 
@@ -143,11 +142,11 @@ text_embeddings = embeddings.embed_query("테스트 문장")
 ```
 
 **특징:**
-- 경량 모델 (~420MB)
-- 다국어 지원 (50개 이상 언어)
-- 차원: 384
+- 고품질 모델 (~420MB)
+- 영어 및 다국어 지원
+- 차원: 768
 - CPU 최적화
-- 한국어-영어 교차 언어 유사도: 96.77%
+- 우수한 의미적 유사도 성능
 
 ---
 
@@ -166,7 +165,7 @@ LLM_MAX_TOKENS=512
 
 # 임베딩 설정 (로컬)
 EMBEDDINGS_PROVIDER=local
-EMBEDDINGS_MODEL=paraphrase-multilingual-MiniLM-L12-v2
+EMBEDDINGS_MODEL=sentence-transformers/all-mpnet-base-v2
 EMBEDDINGS_DEVICE=cpu
 
 # 벡터 데이터베이스
@@ -294,7 +293,7 @@ from langchain.docstore.document import Document
 
 # 1. 임베딩 모델 로드
 embeddings = HuggingFaceEmbeddings(
-    model_name="paraphrase-multilingual-MiniLM-L12-v2"
+    model_name="sentence-transformers/all-mpnet-base-v2"
 )
 
 # 2. 문서 생성
@@ -412,11 +411,11 @@ LLM: Qwen 2.5 7B GGUF (4.4GB)
 ├─ 실행: CPU 전용
 └─ 비용: $0 (외부 API 없음)
 
-임베딩: Sentence Transformers (420MB)
-├─ 모델: paraphrase-multilingual-MiniLM-L12-v2
-├─ 차원: 384
-├─ 언어: 50개 이상
-└─ 한국어: ✅ 우수
+임베딩: MPNet (all-mpnet-base-v2) (~420MB)
+├─ 모델: sentence-transformers/all-mpnet-base-v2
+├─ 차원: 768
+├─ 언어: 영어 및 다국어
+└─ 성능: ✅ 우수
 
 벡터 스토어: FAISS (로컬)
 └─ Milvus (프로덕션 배포용)

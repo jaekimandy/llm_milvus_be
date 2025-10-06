@@ -74,7 +74,7 @@ LLM_THREADS=8
 
 # 임베딩 설정 (로컬)
 EMBEDDINGS_PROVIDER=local
-EMBEDDINGS_MODEL=paraphrase-multilingual-MiniLM-L12-v2
+EMBEDDINGS_MODEL=sentence-transformers/all-mpnet-base-v2
 
 # Milvus
 MILVUS_HOST=localhost
@@ -88,7 +88,7 @@ MILVUS_COLLECTION_NAME=documents
 
 ```bash
 # RAG 시스템 테스트 (29개 테스트)
-python -m pytest tests/test_jina_embeddings.py \
+python -m pytest tests/test_semiconductor_embeddings.py \
                  tests/test_langchain_rag.py \
                  tests/test_langgraph_agent.py -v
 
